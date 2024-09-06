@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="MediaPlayerTest.MainPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Name="_mainPage">
+
+	<ScrollView>
+		<VerticalStackLayout Padding="30,0" Spacing="25">
+			<Image Aspect="AspectFit"
+			       HeightRequest="185"
+			       SemanticProperties.Description="dot net bot in a race car number eight"
+			       Source="dotnet_bot.png" />
+			<toolkit:MediaElement x:Name="_media"
+			                      PositionChanged="_media_PositionChanged"
+			                      ShouldShowPlaybackControls="True"
+			                      Source="embed://song.m4a" />
+			<Label x:Name="_loopingText"
+			       IsVisible="False"
+			       Text="Looping" />
+			<Label>
+				<Label.Text>
+					<MultiBinding StringFormat="{}{0} / {1}">
+						<Binding Path="Position" Source="{x:Reference _media}" />
+						<Binding Path="Duration" Source="{x:Reference _media}" />
+					</MultiBinding>
+				</Label.Text>
+			</Label>
+			<Slider x:Name="_positionSlider"
+			        DragCompleted="_positionSlider_DragCompleted"
+			        DragStarted="_positionSlider_DragStarted"
+			        MinimumTrackColor="Gray" />
+			<Button Clicked="OnCounterClicked" Text="Play" />
+			<Button Clicked="Button_Clicked" Text="Stop" />
+			<Button Clicked="Button_Clicked_1" Text="Seek 5 seconds ahead" />
+			<Button Clicked="Button_Clicked_2" Text="Loop Next 10 Seconds" />
+		</VerticalStackLayout>
+	</ScrollView>
+
+</ContentPage>
